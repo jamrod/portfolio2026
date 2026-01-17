@@ -19,5 +19,5 @@ jobs:
           role-to-assume: arn:aws:iam::716524653159:role/GitHubActionS3Sync
           aws-region: us-east-1
 
-      - name: Identity Check
-        run: aws sts get-caller-identity
+      - name: sync files
+        run: aws s3 sync . s3://jamescrodgers.com --exclude ".git/*" --exclude ".github/*"
