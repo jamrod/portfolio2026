@@ -17,7 +17,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${{ secrets.PORTFOLIO2026_ROLE }}
+        role-to-assume: arn:aws:iam::716524653159:role/GitHub_jamescrodgers.com
         aws-region: us-west-2
 
     - name: Sync files to S3
