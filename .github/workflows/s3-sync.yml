@@ -1,4 +1,4 @@
-name: Test AWS Connection
+name: Deploy Site to S3
 on:
   push:
     branches:
@@ -18,8 +18,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::716524653159:role/GitHubActionS3Sync
+          role-to-assume: ${{ secrets.PORTFOLIO2026_ROLE }}
           aws-region: us-east-1
 
       - name: sync files
-        run: aws s3 sync . s3://jamescrodgers.com --exclude ".git/*" --exclude ".github/*" --exclude .python-version
+        run: aws s3 sync . s3://jamescrodgers.com --exclude ".git/*" --exclude ".github/*"
