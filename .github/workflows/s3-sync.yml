@@ -1,33 +1,24 @@
-name: Sync files to s3
-on:
-  push:
-    branches:
-    - main
+name: Test AWS Connection
+on: 
+  workflow_dispatch: # Allows you to run this manually from the Actions tab
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Debug OIDC Token
-      run: |
-        echo "Checking if ACTIONS_ID_TOKEN_REQUEST_URL is set..."
-        if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
-          echo "❌ OIDC Token permissions are NOT set correctly in YAML"
-        else
-          echo "✅ OIDC Token permissions are set"
-        fi
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # HARDCODE the ARN here for this one test
+          role-to-assume: arn:aws:iam::716524653159:role/GitHubActionS3Sync
+          aws-region: us-east-1
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::716524653159:role/GitHub_jamescrodgers.com
-        aws-region: us-west-2
-
-    - name: Sync files to S3
-      run: aws s3 sync . s3://jamescrodgers.com --exclude ".git*"
+      - name: Identity Check
+        run: aws sts get-caller-identity
