@@ -14,14 +14,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-		- name: Debug OIDC Token
-        run: |
-          echo "Checking if ACTIONS_ID_TOKEN_REQUEST_URL is set..."
-          if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
-            echo "❌ OIDC Token permissions are NOT set correctly in YAML"
-          else
-            echo "✅ OIDC Token permissions are set"
-          fi
+    - name: Debug OIDC Token
+      run: |
+        echo "Checking if ACTIONS_ID_TOKEN_REQUEST_URL is set..."
+        if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
+          echo "❌ OIDC Token permissions are NOT set correctly in YAML"
+        else
+          echo "✅ OIDC Token permissions are set"
+        fi
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
