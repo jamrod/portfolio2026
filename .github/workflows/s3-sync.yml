@@ -27,4 +27,4 @@ jobs:
           aws-region: us-east-1
 
       - name: sync files
-        run: aws s3 sync . s3://jamescrodgers.com --exclude ".git/*" --exclude ".github/*"
+        run: aws s3 sync . s3://jamescrodgers.com --exclude ".git/*" --exclude ".github/*" --delete
