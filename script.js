@@ -30,8 +30,8 @@ window.addEventListener('scroll', () => {
 
 // Add intersection observer for fade-in animations
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -43,8 +43,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections for animation
-document.querySelectorAll('section').forEach(section => {
+// Observe all sections for animation (skip hero since it should be visible immediately)
+document.querySelectorAll('section:not(.hero)').forEach(section => {
     section.style.opacity = '0';
     section.style.transform = 'translateY(30px)';
     section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
@@ -118,7 +118,7 @@ timelineItems.forEach(item => {
 const footerText = document.querySelector('.footer p');
 if (footerText) {
     const currentYear = new Date().getFullYear();
-    footerText.textContent = `© ${currentYear} James Rodgers. Built with ♥ in Colorado.`;
+    footerText.innerHTML = `© ${currentYear} James Rodgers <img src="./img/JRsymbol.png" alt="JR" class="footer-logo"> Built with ♥ in Colorado`;
 }
 
 // Add loading class removal
