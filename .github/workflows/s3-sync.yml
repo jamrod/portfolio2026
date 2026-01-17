@@ -1,5 +1,5 @@
 name: Test AWS Connection
-on: 
+on:
   workflow_dispatch: # Allows you to run this manually from the Actions tab
 
 permissions:
@@ -16,7 +16,6 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          # HARDCODE the ARN here for this one test
           role-to-assume: arn:aws:iam::716524653159:role/GitHubActionS3Sync
           aws-region: us-east-1
 
