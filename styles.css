@@ -411,6 +411,11 @@ body {
     font-size: 2rem;
 }
 
+.cert-badge-credly {
+    justify-content: center;
+    min-height: 270px;
+}
+
 /* Contact Section */
 .contact {
     padding: 6rem 0;
